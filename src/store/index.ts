@@ -5,17 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import sagas from './sagas';
-import modalsReducer from './reducers/modals';
-import uiReducer from './reducers/ui';
-import userReducer from './reducers/user';
-import alertListReducer from './reducers/alertList';
+import rootSaga from './sagas';
 
 const rootReducer = combineReducers({
-    modals: modalsReducer,
-    ui: uiReducer,
-    user: userReducer,
-    alertList: alertListReducer
+
 });
 
 export const setupStore = (preloadedState?: Partial<RootState>) => {
@@ -28,7 +21,7 @@ export const setupStore = (preloadedState?: Partial<RootState>) => {
         preloadedState
     });
 
-    sagaMiddleware.run(sagas);
+    sagaMiddleware.run(rootSaga);
 
     return store;
 };
