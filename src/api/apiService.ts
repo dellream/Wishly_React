@@ -34,7 +34,6 @@ export default class ApiService {
             withCredentials: true,
         });
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         this._api.interceptors.response.use((response) => response.data);
     }
 
