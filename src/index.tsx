@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import {createRoot} from 'react-dom/client';
 import {Provider} from 'react-redux';
-import dotenv from 'dotenv';
-
 import store from './store';
 // import 'styles/base.scss';
 
 import App from './app';
-
-dotenv.config();
+import ReactQueryProvider from 'api/ReactQueryProvider';
 
 function init() {
     const container = document.querySelector('#root');
@@ -18,7 +15,9 @@ function init() {
 
         root.render(
             <Provider store={store}>
-                <App/>
+                <ReactQueryProvider>
+                    <App/>
+                </ReactQueryProvider>
             </Provider>
         );
     } else {

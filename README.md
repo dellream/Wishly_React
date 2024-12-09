@@ -230,6 +230,134 @@ wishlist.get<ResponseType>('/path/to/resource');
 
 ### React-Query
 
+TanStack Query или React Query: Асинхронный state-менеджер\
+Что такое state-менеджер?\
+Обычный state-менеджер (например, Redux) подключается к приложению и позволяет управлять состоянием приложения, вынося сложную логику из компонентов.
+
+Алгоритм работы синхронного state-менеджера:
+
+1. UI диспатчит (dispatch) определенные события.
+2. На основании этих событий изменяется модель (state).
+3. Компоненты реагируют на изменения state, и UI перерисовывается.
+
+Эта логика является синхронной и отлично подходит для обработки сложной интерактивности, как в приложениях вроде Miro, Todoist или Google Docs.\
+В таких проектах чаще всего используется Redux или другие синхронные state-менеджеры.
+
+Почему нужен асинхронный state-менеджер?\
+При взаимодействии с сервером в алгоритм работы добавляется еще одно звено — интернет, через который проходят запросы. Чтобы минимизировать количество запросов, используется кеширование.
+
+![asyncStateManager.png](git/asyncStateManager.png)
+
+Асинхронные задачи с кешем часто однотипны, например:
+
+- Отслеживание состояния запросов.
+- Повторные попытки (ретраи).
+- Обработка ошибок.
+- Очистка кеша и "мусора".
+- Дедупликация запросов (один запрос из нескольких компонентов).
+
+С этими задачами лучше всего справляются асинхронные state-менеджеры (например, RTK Query, React Query, Apollo и другие).
+
+Ключевые особенности:\
+Асинхронный state-менеджер не заменяет синхронный, а решает другие задачи.
+
+Важно использовать оба типа в зависимости от потребностей приложения:
+* Синхронный — для управления состоянием внутри приложения.
+* Асинхронный — для работы с данными, полученными с сервера.
+
+#### Настройка React-Query
+
+1. Инициализация [QueryClient](https://tanstack.com/query/latest/docs/reference/QueryClient)
+   QueryClient является центральным объектом React Query.
+   В нем хранятся все запросы, кеши и прочие данные.
+
+2. Создание провайдера
+   Для доступа к QueryClient в компонентах необходимо:
+* Создать провайдер (QueryClientProvider), который оборачивает все приложение.
+* Передать инициализированный клиент как пропс провайдеру.
+
+После этого хуки React Query получают доступ к QueryClient:
+* useQuery — для выполнения запросов.
+* useMutation — для изменения данных.
+
+Структура настройки:
+1. Инициализация QueryClient\
+Файл: `src/api/client.ts`
+
+```typescript
+const queryClient = new QueryClient({
+   queryCache: new QueryCache({
+      onError: _error => {
+         const error = _error as unknown as DefaultError;
+
+         store.dispatch(addErrorAlert(getErrorMessage(error)));
+      }
+   }),
+   mutationCache: new MutationCache({
+      onError: _error => {
+         const error = _error as unknown as DefaultError;
+
+         store.dispatch(addErrorAlert(getErrorMessage(error)));
+      }
+   }),
+   defaultOptions: {
+      queries: {
+         staleTime: 10 * 60 * 1000,
+         retry: false,
+         refetchOnMount: true,
+         refetchOnWindowFocus: false
+      }
+   }
+});
+
+export default queryClient;
+```
+
+2. Создание провайдера\
+Файл: `src/api/ReactQueryProvider.tsx`
+
+```typescript jsx
+interface Props {
+    children: React.ReactNode;
+}
+
+const ReactQueryProvider: React.FC<Props> = ({children}) => (
+    <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left"/>
+        {children}
+    </QueryClientProvider>
+);
+
+export default ReactQueryProvider;
+```
+
+3. Оборачивание приложения провайдером\
+Файл: `src/index.tsx`
+```typescript jsx
+function init() {
+   const container = document.querySelector('#root');
+
+   if (container) {
+      const root = createRoot(container);
+
+      root.render(
+              <Provider store={store}>
+                 <ReactQueryProvider>
+                    <App/>
+                 </ReactQueryProvider>
+              </Provider>
+      );
+   } else {
+      throw Error('Target container is not a DOM element.');
+   }
+}
+
+init();
+```
+
+Теперь приложение готово для работы с React Query.  
+Можно использовать хуки useQuery и useMutation для запросов и мутаций.
+
 ### React-Router
 
 ### Sass
