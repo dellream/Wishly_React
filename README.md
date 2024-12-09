@@ -69,8 +69,8 @@
 В src/index.tsx приложение App оборачивается в Provider, который принимает store в качестве props.
 ```typescript jsx
 root.render(
-        <Provider store={ store }>
-           <App />
+        <Provider store={store}>
+           <App/>
         </Provider>
 );
 ```
@@ -95,7 +95,7 @@ export const setupStore = (preloadedState?: Partial<RootState>) => {
       reducer: rootReducer,
       devTools: isDevelopment,
       middleware: getDefaultMiddleware =>
-              getDefaultMiddleware({ thunk: false, serializableCheck: false }).concat(sagaMiddleware),
+              getDefaultMiddleware({thunk: false, serializableCheck: false}).concat(sagaMiddleware),
       preloadedState
    });
 
@@ -182,7 +182,7 @@ Axios - это библиотека решающая часть неудобст
 1. Автоматически обрабатывает JSON-ответы без необходимости вызывать response.json()
 ```js
 axios.get('https://api.example.com/data').then(response => {
-  console.log(response.data); // Данные уже распарсены
+   console.log(response.data); // Данные уже распарсены
 });
 ```
 2. Axios автоматически выбрасывает исключение для HTTP-статусов ошибок (например, 404, 500), а не только для сетевых ошибок
@@ -195,8 +195,8 @@ axios.get('https://api.example.com/data')
 3. Поддержка интерцепторов. Можно централизованно добавлять логику перед каждым запросом или ответом (например, токены авторизации или логи ошибок)
 ```js
 axios.interceptors.request.use(config => {
-  config.headers.Authorization = `Bearer ${token}`;
-  return config;
+   config.headers.Authorization = `Bearer ${token}`;
+   return config;
 });
 ```
 4. Удобная работа с конфигурацией. Базовые настройки (например, baseURL, заголовки) задаются один раз. И так далее...
@@ -318,14 +318,14 @@ export default queryClient;
 
 ```typescript jsx
 interface Props {
-    children: React.ReactNode;
+   children: React.ReactNode;
 }
 
 const ReactQueryProvider: React.FC<Props> = ({children}) => (
-    <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left"/>
-        {children}
-    </QueryClientProvider>
+        <QueryClientProvider client={queryClient}>
+           <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left"/>
+           {children}
+        </QueryClientProvider>
 );
 
 export default ReactQueryProvider;
@@ -360,7 +360,79 @@ init();
 
 ### React-Router
 
-### Sass
+#### Зачем нужен роутинг?
+В веб-приложениях часто требуется отображать разные страницы или разделы в зависимости от действий пользователя.  
+Например, переход по ссылкам, открытие профиля, или отображение страницы с ошибкой 404.
+
+Без роутинга для изменения страниц пришлось бы перезагружать приложение полностью, что неэффективно
+и плохо сказывается на пользовательском опыте.
+
+React-Router — это библиотека, которая управляет навигацией внутри React-приложения без перезагрузки страницы. 
+
+Она позволяет:
+
+* Создавать маршруты (routes) для различных страниц.
+* Подключать компоненты к соответствующим маршрутам.
+* Отображать разные компоненты в зависимости от пути (URL).
+* С React-Router приложение становится одностраничным (SPA - single page application), а маршрутизация обрабатывается 
+на стороне клиента.
+
+#### Настройка React-Router
+1. Создание маршрутов (routes)\
+Для настройки маршрутов создается массив объектов RouteObject. Каждый маршрут описывает:
+
+- path: путь в URL.
+- element: компонент, который отображается на этом пути.
+- children: дочерние маршруты (вложенные пути).
+
+2. Инициализация роутера\
+React-Router предоставляет функцию createBrowserRouter для создания роутера на основе заданной конфигурации.
+
+3. Оборачивание приложения роутером\
+Созданный роутер подключается к приложению через компонент RouterProvider.
+
+#### Структура настройки:
+
+1. Конфигурация маршрутов\
+Файл `src/routesConfig.tsx`
+```typescript jsx
+// Конфигурация маршрутов
+const routes: RouteObject[] = [
+   {
+      element: <Layout/>, // Общий layout для всех страниц
+      children: [
+         {
+            path: PATH.MAIN, // Главная страница
+            element: <Main/>
+         },
+         {
+            path: PATH.NOT_FOUND, // Страница 404
+            element: <NotFound/>
+         }
+         // Пример защищенного маршрута:
+         // {
+         //   path: '/',
+         //   element: <ProtectedRoute />,
+         //   children: protectedRoutes // Вложенные защищенные маршруты
+         // }
+      ]
+   }
+];
+```
+
+2. Оборачивание приложения провайдером роутера
+Файл: `src/app.tsx`
+```typescript jsx
+function App() {
+   return (
+           <RouterProvider router={routesConfig}/>
+   );
+}
+```
+
+На этом роутинг настроен, в дальнейшнем необходимо производить подключение новых компонент по мере их появления
+
+### Стилизация с использованием Sass
 
 <a name="scripts"></a>
 ## Доступные скрипты
