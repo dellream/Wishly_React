@@ -1,4 +1,4 @@
-import {NotFound} from "../index";
+import NotFound from "./notFound";
 
 export default () => (
     <NotFound/>

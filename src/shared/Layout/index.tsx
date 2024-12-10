@@ -8,7 +8,7 @@ const AppLayout: React.FC = () => {
     return (
         <Layout>
             <Header style={{ backgroundColor: '#001529', color: '#fff', padding: '0 20px' }}>
-                header
+                Здесь будет навигация и авторизация
             </Header>
             <Layout>
                 <Content style={{ padding: '20px', backgroundColor: '#fff' }}>
@@ -16,7 +16,7 @@ const AppLayout: React.FC = () => {
                 </Content>
             </Layout>
             <Footer style={{ textAlign: 'center', backgroundColor: '#001529', color: '#fff' }}>
-                footer
+                Здесь будут ссылки
             </Footer>
         </Layout>
     );
