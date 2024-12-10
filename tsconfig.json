@@ -1,27 +1,49 @@
 {
-  "include": ["src"],
-  "exclude": ["node_modules"],
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
   "compilerOptions": {
     "module": "ESNext",
     "baseUrl": "./src",
     "paths": {
-      "constants": ["styles/constants.scss"],
-      "jsConstants": ["constants/index.ts"],
-      "api/*": ["api/*"],
-      "store": ["store/index.ts"],
-      "routesConfig": ["routesConfig.ts"],
-      "hooks": ["hooks/index.ts"],
-      "actions/*": ["store/reducers/*"],
-      "utils": ["utils/index.ts"],
-      "types": ["types/index.ts"]
+      "constants": [
+        "styles/constants.scss"
+      ],
+      "jsConstants": [
+        "constants/index.ts"
+      ],
+      "api/*": [
+        "api/*"
+      ],
+      "store": [
+        "store/index.ts"
+      ],
+      "routesConfig": [
+        "routesConfig.ts"
+      ],
+      "hooks": [
+        "hooks/index.ts"
+      ],
+      "actions/*": [
+        "store/reducers/*"
+      ],
+      "utils": [
+        "utils/index.ts"
+      ],
+      "types": [
+        "types/index.ts"
+      ]
     },
-//    "plugins": [{
-//      "name": "typescript-plugin-css-modules",
-//      "options": {
-//        "customMatcher": "scss$",
-//        "noUncheckedIndexedAccess": true
-//      }
-//    }],
+    //    "plugins": [{
+    //      "name": "typescript-plugin-css-modules",
+    //      "options": {
+    //        "customMatcher": "scss$",
+    //        "noUncheckedIndexedAccess": true
+    //      }
+    //    }],
     "allowUmdGlobalAccess": true,
     "jsx": "react-jsx",
     "moduleResolution": "Node",
@@ -33,6 +55,11 @@
     "noEmit": true,
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "allowUnreachableCode": false // правило ESLint: no-unreachable работает хуже
+    "allowUnreachableCode": false
+    // правило ESLint: no-unreachable работает хуже
+  },
+  "scripts": {
+    "start": "webpack serve --config webpack.config.js --mode development"
   }
 }
+

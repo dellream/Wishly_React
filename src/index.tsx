@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import store from './store';
 // import 'styles/base.scss';
 
-import App from './app';
+import App from './App';
 import ReactQueryProvider from 'api/ReactQueryProvider';
 
 function init() {

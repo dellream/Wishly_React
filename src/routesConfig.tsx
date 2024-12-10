@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
 import { PATH } from 'jsConstants';
-import { Layout } from 'shared';
+import { AppLayout } from 'shared';
 
 import {
     Main,
@@ -10,7 +10,7 @@ import {
 
 const routes: RouteObject[] = [
     {
-        element: <Layout />,
+        element: <AppLayout />,
         children: [
             {
                 path: PATH.MAIN,

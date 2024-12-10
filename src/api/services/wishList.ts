@@ -1,10 +1,10 @@
 import ApiService from 'api/apiService';
 
-const ENV = (process.env.NODE_ENV as 'prod' | 'local') || 'prod';
+const ENV = (process.env.NODE_ENV as 'production' | 'development') || 'production';
 
-const apiUrls: Record<'prod' | 'local', string | undefined> = {
-    prod: process.env.REACT_APP_PROD_URL,
-    local: process.env.REACT_APP_LOCAL_URL,
+const apiUrls: Record<'production' | 'development', string | undefined> = {
+    production: process.env.REACT_APP_PRODUCTION_URL,
+    development: process.env.REACT_APP_DEVELOPMENT_URL,
 };
 
 const baseURL = apiUrls[ENV];

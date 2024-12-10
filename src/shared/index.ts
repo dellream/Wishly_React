@@ -1,3 +1,3 @@
-import Layout from './Layout';
+import AppLayout from './Layout';
 
-export { Layout }
+export { AppLayout };
