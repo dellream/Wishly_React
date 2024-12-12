@@ -1,14 +1,7 @@
 import {FC} from "react";
 import {useNavigate} from "react-router-dom";
 import {Layout, Menu, Row} from "antd";
-
-enum HeaderItemIds {
-    MAIN = 'MAIN',
-    CHAT = 'CHAT',
-    MENU = 'MENU',
-    PROFILE = 'PROFILE',
-    AUTH = 'AUTH'
-}
+import {PATH} from "jsConstants";
 
 interface NavbarProps {
     isAuthenticated: boolean
@@ -19,15 +12,15 @@ export const Navbar: FC<NavbarProps> = ({isAuthenticated}) => {
 
     const menuAuthItems = [
         {
-            key: HeaderItemIds.AUTH,
+            key: PATH.LOGIN,
             label: 'Войти',
-            onClick: () => router(HeaderItemIds.AUTH)
+            onClick: () => router(PATH.LOGIN)
         }
     ]
 
     const menuNotAuthItems = [
         {
-            key: HeaderItemIds.AUTH,
+            key: PATH.LOGIN,
             label: 'Выйти',
             onClick: () => console.log('Нажата кнопка выйти авторизованным пользователем')
         }

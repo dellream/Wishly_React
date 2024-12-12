@@ -1,10 +1,6 @@
 {
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
+  "include": ["src", "@types"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "module": "ESNext",
     "baseUrl": "./src",
@@ -37,13 +33,13 @@
         "types/index.ts"
       ]
     },
-    //    "plugins": [{
-    //      "name": "typescript-plugin-css-modules",
-    //      "options": {
-    //        "customMatcher": "scss$",
-    //        "noUncheckedIndexedAccess": true
-    //      }
-    //    }],
+    "plugins": [{
+      "name": "typescript-plugin-css-modules",
+      "options": {
+        "customMatcher": "scss$",
+        "noUncheckedIndexedAccess": true
+      }
+    }],
     "allowUmdGlobalAccess": true,
     "jsx": "react-jsx",
     "moduleResolution": "Node",

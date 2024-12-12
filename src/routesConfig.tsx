@@ -1,12 +1,9 @@
-import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import {createBrowserRouter, RouteObject} from 'react-router-dom';
 
-import { PATH } from 'jsConstants';
-import { AppLayout } from 'shared';
+import {PATH} from 'jsConstants';
+import {AppLayout} from 'shared';
 
-import {
-    Main,
-    NotFound,
-} from './pages';
+import {Main, NotFound, Login} from './pages';
 
 const routes: RouteObject[] = [
     {
@@ -20,6 +17,10 @@ const routes: RouteObject[] = [
                 path: PATH.NOT_FOUND,
                 element: <NotFound />
             },
+            {
+                path: PATH.LOGIN,
+                element: <Login />
+            }
             // {
             //     path: '/',
             //     element: <ProtectedRoute />,

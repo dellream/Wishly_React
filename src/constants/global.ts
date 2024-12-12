@@ -13,5 +13,6 @@ export enum PATH {
     MAIN = '/',
     REGISTRATION = '/registration',
     PROFILE = '/profile',
-    NOT_FOUND = '*'
+    NOT_FOUND = '*',
+    LOGIN = '/login',
 }
