@@ -41,9 +41,18 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     'style-loader',
-                    'css-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                localIdentName: '[local]_[hash:base64:5]'
+                            }
+                        }
+                    },
+                    'postcss-loader',
                     'sass-loader'
                 ],
+                include: /src/
             },
             {
                 test: /\.(png|jpe?g|gif|svg|webp)$/i,
