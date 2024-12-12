@@ -1,15 +1,17 @@
 import React from "react";
 import { Layout } from "antd";
 import {Outlet} from "react-router-dom";
+import {Navbar} from "./Navbar";
+import {useAppSelector} from "store";
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 const AppLayout: React.FC = () => {
+    const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated)
+
     return (
         <Layout>
-            <Header style={{ backgroundColor: '#001529', color: '#fff', padding: '0 20px' }}>
-                Здесь будет навигация и авторизация
-            </Header>
+            <Navbar isAuthenticated={isAuthenticated} />
             <Layout>
                 <Content style={{ padding: '20px', backgroundColor: '#fff' }}>
                     <Outlet /> {/* Вложенные маршруты будут рендериться здесь */}
