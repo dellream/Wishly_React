@@ -1,0 +1,31 @@
+/* Общие стили футера */
+.footer {
+  background-color: #1d1d1d;
+  color: #fff;
+  padding: 20px 0;
+  height: 150px;
+}
+
+/* Контейнер для центрирования */
+.footerContainer {
+  max-width: 1312px;
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: center;
+}
+
+/* Ссылки в футере */
+.footerLinks {
+  margin-top: 10px;
+}
+
+.footerLinks a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+.footerLinks a:hover {
+  color: #8c756f;
+}

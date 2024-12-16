@@ -1,0 +1,59 @@
+/* Хедер как фоновый контейнер */
+.header {
+  background-color: #FFF0F0;
+  color: black;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 0;
+}
+
+/* Внутренний контейнер для центрирования */
+.container {
+  max-width: 1312px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+/* Логотип */
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+}
+
+/* Навбар */
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+/* Имя пользователя */
+.username {
+  margin-right: 20px;
+  color: black;
+  font-size: 16px;
+}
+
+/* Меню */
+.menu {
+  background-color: transparent;
+  border-bottom: none;
+  display: flex;
+  justify-content: flex-end;
+  color: black;
+
+  :global {
+    .ant-menu-item {
+      &:hover {
+        color: black !important;
+      }
+
+      &:hover::after {
+        border-bottom-color: #d9bfbf !important;
+      }
+    }
+  }
+}
