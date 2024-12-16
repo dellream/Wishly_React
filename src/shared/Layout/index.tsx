@@ -6,6 +6,8 @@ import {useAppSelector} from "store";
 import {PATH} from "jsConstants";
 import {Footer} from "./sections/Footer/Footer";
 
+import styles from './styles.scss'
+
 const {Content} = Layout;
 
 const AppLayout: React.FC = () => {
@@ -16,16 +18,15 @@ const AppLayout: React.FC = () => {
 
     return (
         <Layout>
-            <Navbar isAuthenticated={isAuthenticated}/>
-            <Layout>
-                <Content style={{padding: '20px', backgroundColor: '#fff'}}>
-                    <Outlet/> {/* Вложенные маршруты будут рендериться здесь */}
-                </Content>
-            </Layout>
-            {/* Убираем футер на странице логина */}
-            {!isLoginPage && (
-                <Footer />
-            )}
+            <div className={styles.layout}>
+                <Navbar isAuthenticated={isAuthenticated}/>
+                <div className={styles.content}>
+                    <Content>
+                        <Outlet/>
+                    </Content>
+                </div>
+                {!isLoginPage && <Footer/>} {/* Футер скрывается на странице логина */}
+            </div>
         </Layout>
     );
 };
