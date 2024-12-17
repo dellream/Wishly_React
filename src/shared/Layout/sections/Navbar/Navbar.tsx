@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {Layout, Menu, Row, theme} from "antd";
 import {PATH} from "jsConstants";
 
@@ -11,6 +11,10 @@ import styles from './styles.scss'
 
 export const Navbar: FC<NavbarProps> = ({isAuthenticated}) => {
     const router = useNavigate();
+
+    const location = useLocation();
+    const isLoginPage = location.pathname === PATH.LOGIN;
+
 
     const menuAuthItems = [
         {
@@ -29,7 +33,7 @@ export const Navbar: FC<NavbarProps> = ({isAuthenticated}) => {
     ]
 
     return (
-        <Layout.Header className={styles.header}>
+        <Layout.Header className={`${styles.header} ${isLoginPage ? styles.loginPage : ''}`}>
             <div className={styles.container}>
                 <div className={styles.logo}>Wishly</div>
                 <Row justify="end" align="middle" className={styles.navbar}>

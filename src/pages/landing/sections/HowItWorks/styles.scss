@@ -21,10 +21,10 @@
 
 .columns {
   display: flex;
-  flex-direction: row; // Горизонтальное расположение
-  justify-content: space-between; // Равномерное распределение колонок
-  align-items: flex-start; // Выравнивание по верхнему краю
-  gap: 32px; // Промежуток между колонками
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
 
   span {
     font-size: 1rem;

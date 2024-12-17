@@ -31,6 +31,9 @@
       ],
       "types": [
         "types/index.ts"
+      ],
+      "shared": [
+        "shared/index.ts"
       ]
     },
     "plugins": [{

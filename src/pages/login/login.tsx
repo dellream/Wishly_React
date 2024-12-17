@@ -1,13 +1,24 @@
-import React from 'react';
-import {Row} from "antd";
+import React from "react";
+import styles from "./styles.scss";
+import { LoginForm } from "shared";
+import vk_svg from "/files/vk.svg";
 
-import styles from './styles.scss'
-
-const Login = () => {
+const Login: React.FC = () => {
     return (
-        <Row justify={"center"} align={"middle"} className={ styles.h100 }>
-            <h1>Login page</h1>
-        </Row>
-    )
+        <div className={styles.container}>
+            <div className={styles.loginForm}>
+                <div className={styles.title}>
+                    <h2>Привет!</h2>
+                    <span>Рады тебя видеть c:</span>
+                </div>
+                <LoginForm />
+                <div className={styles.anotherEntry}>
+                    <span>Или войти с помощью</span>
+                    <img src={vk_svg} alt="vk"></img>
+                </div>
+            </div>
+        </div>
+    );
 };
+
 export default Login;
