@@ -1,10 +1,13 @@
 import React, {FC} from 'react';
+import {Hero} from "./sections/Hero";
+import {HowItWorks} from "./sections/HowItWorks";
 
 const Landing: FC = () => {
     return (
-        <div>
-            <h1>Landing page</h1>
-        </div>
+        <>
+            <Hero />
+            <HowItWorks />
+        </>
     )
 };
 export default Landing;
