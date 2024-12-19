@@ -3,6 +3,10 @@ import {Button, Form, Input} from "antd";
 import styles from "./styles.scss";
 
 const LoginForm: React.FC = () => {
+    const submit = () => {
+        console.log("submit");
+    }
+
     return (
         <Form
             name="basic"
@@ -11,6 +15,7 @@ const LoginForm: React.FC = () => {
             style={{ width: "100%", maxWidth: "100%" }} // Полная ширина родительского контейнера
             initialValues={{ remember: true }}
             autoComplete="off"
+            onFinish={submit}
         >
 
             <Form.Item

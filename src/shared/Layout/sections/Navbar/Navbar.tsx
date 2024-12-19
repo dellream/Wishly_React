@@ -35,7 +35,9 @@ export const Navbar: FC<NavbarProps> = ({isAuthenticated}) => {
     return (
         <Layout.Header className={`${styles.header} ${isLoginPage ? styles.loginPage : ''}`}>
             <div className={styles.container}>
-                <div className={styles.logo}>Wishly</div>
+                <div className={styles.logo} onClick={() => router(PATH.MAIN)} role="button">
+                    Wishly
+                </div>
                 <Row justify="end" align="middle" className={styles.navbar}>
                     {isAuthenticated ? (
                         <>
