@@ -1,7 +1,14 @@
 import {AuthState, AuthAction, AuthActionsEnum} from "actions/auth/types";
+import {User} from "types";
 
-const initialState: AuthState = {
-    isAuthenticated: false
+type UserState = User & AuthState
+
+const initialState: UserState = {
+    id: undefined,
+    email: '',
+    is_email_activated: false,
+    activation_link: null,
+    isAuthenticated: false,
 };
 
 export default function authReducer(state = initialState, action: AuthAction): AuthState {

@@ -1,6 +1,6 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
 
-interface ApiResponse<T> {
+export interface ApiResponse<T> {
     data: T;
     headers: Record<string, string>;
     status: number;
@@ -34,7 +34,11 @@ export default class ApiService {
             withCredentials: true,
         });
 
-        this._api.interceptors.response.use((response) => response.data);
+        this._api.interceptors.request.use((config) => {
+                config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
+                return config;
+            }
+        );
     }
 
     public get<T>(

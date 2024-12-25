@@ -2,6 +2,7 @@ const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
+const webpack = require('webpack');
 
 require('dotenv').config();
 
@@ -69,6 +70,11 @@ module.exports = {
         new htmlWebpackPlugin({
             filename: 'index.html',
             template: path.resolve('src', 'template.hbs'),
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+            'process.env.REACT_APP_PRODUCTION_URL': JSON.stringify(process.env.REACT_APP_PRODUCTION_URL),
+            'process.env.REACT_APP_DEVELOPMENT_URL': JSON.stringify(process.env.REACT_APP_DEVELOPMENT_URL),
         }),
         // isDevelopment && new ReactRefreshWebpackPlugin(),
         new ForkTsCheckerWebpackPlugin(), // Проверка типов в фоне
