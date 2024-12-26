@@ -14,9 +14,13 @@ const initialState: UserState = {
 export default function authReducer(state = initialState, action: AuthAction): AuthState {
     switch (action.type) {
         case AuthActionsEnum.SET_AUTH:
-            return {...state, isAuthenticated: action.payload}
+            return { ...state, isAuthenticated: action.payload };
+        case AuthActionsEnum.SET_USER:
+            return { ...state, ...action.payload, isAuthenticated: true };
+        case AuthActionsEnum.LOGOUT:
+            return initialState;
         default:
-            return state
+            return state;
     }
 }
 

@@ -11,5 +11,5 @@ export const registration = async (data: UserCredentialsIn) =>
 export const logout = async () =>
     wishlist.post<string>('/v1/logout', {});
 
-export const refreshToken = async (refresh_token: string): Promise<ApiResponse<TokenInfo>> =>
-    wishlist.get<TokenInfo>('/v1/refresh?refresh_token=' + refresh_token);
+export const refreshToken = async (): Promise<ApiResponse<TokenInfo>> =>
+    wishlist.get<TokenInfo>('/v1/refresh_token', {withCredentials: true});

@@ -8,11 +8,13 @@ interface NavbarProps {
 }
 
 import styles from './styles.scss'
+import {useLogout} from "api/queries/auth";
 
 export const Navbar: FC<NavbarProps> = ({isAuthenticated}) => {
     const router = useNavigate();
-
+    const { mutate: logout } = useLogout();
     const location = useLocation();
+
     const isAuthPage = location.pathname === PATH.LOGIN || location.pathname === PATH.REGISTRATION;
 
 
@@ -28,7 +30,9 @@ export const Navbar: FC<NavbarProps> = ({isAuthenticated}) => {
         {
             key: PATH.LOGIN,
             label: 'Выйти',
-            onClick: () => console.log('Нажата кнопка выйти авторизованным пользователем')
+            onClick: () => {
+                logout();
+            }
         }
     ]
 
