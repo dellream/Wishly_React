@@ -14,7 +14,7 @@ const AppLayout: React.FC = () => {
     const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated)
     const location = useLocation();
 
-    const isLoginPage = location.pathname === PATH.LOGIN;
+    const isAuthPage = location.pathname === PATH.LOGIN || location.pathname === PATH.REGISTRATION;
 
     return (
         <Layout>
@@ -25,7 +25,7 @@ const AppLayout: React.FC = () => {
                         <Outlet/>
                     </Content>
                 </div>
-                {!isLoginPage && <Footer/>} {/* Футер скрывается на странице логина */}
+                {!isAuthPage && <Footer/>} {/* Футер скрывается на странице логина */}
             </div>
         </Layout>
     );

@@ -13,7 +13,7 @@ export const Navbar: FC<NavbarProps> = ({isAuthenticated}) => {
     const router = useNavigate();
 
     const location = useLocation();
-    const isLoginPage = location.pathname === PATH.LOGIN;
+    const isAuthPage = location.pathname === PATH.LOGIN || location.pathname === PATH.REGISTRATION;
 
 
     const menuAuthItems = [
@@ -33,7 +33,7 @@ export const Navbar: FC<NavbarProps> = ({isAuthenticated}) => {
     ]
 
     return (
-        <Layout.Header className={`${styles.header} ${isLoginPage ? styles.loginPage : ''}`}>
+        <Layout.Header className={`${styles.header} ${isAuthPage ? styles.loginPage : ''}`}>
             <div className={styles.container}>
                 <div className={styles.logo} onClick={() => router(PATH.MAIN)} role="button">
                     Wishly

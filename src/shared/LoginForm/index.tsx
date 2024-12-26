@@ -1,19 +1,33 @@
 import React from "react";
 import {Button, Form, Input, message} from "antd";
 import styles from "./styles.scss";
-import {useLogin} from "api/queries/auth";
+import {useLogin, useRegistration} from "api/queries/auth";
 import {UserCredentialsIn} from "api/types/auth";
+import {DefaultError} from "api/apiService";
+import {getErrorMessage} from "../../utils/getErrorMessage";
+import {useNavigate} from "react-router-dom";
+import {PATH} from "jsConstants";
 
-const LoginForm: React.FC = () => {
-    const { mutate } = useLogin();
+interface Props {
+    isLogin: boolean
+}
+
+const LoginForm: React.FC<Props> = ({ isLogin }) => {
+    const navigate = useNavigate();
+    const { mutate: login } = useLogin();
+    const { mutate: register } = useRegistration();
 
     const onFinish = (values: UserCredentialsIn) => {
-        mutate(values, {
+        const mutateFn = isLogin ? login : register;
+
+        mutateFn(values, {
             onSuccess: () => {
                 message.success("Успешный вход!");
+                navigate(PATH.MAIN);
             },
             onError: (error) => {
-                message.error("Ошибка при входе: " + error.message);
+                const errorMessage = getErrorMessage(error as DefaultError);
+                message.error(errorMessage);
             },
         });
     };
@@ -30,7 +44,7 @@ const LoginForm: React.FC = () => {
         >
 
             <Form.Item
-                label="Логин"
+                label="Email"
                 name="email"
                 rules={[{ required: true, message: 'Пожалуйста, введите email!' }]}
             >

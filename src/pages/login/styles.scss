@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     box-sizing: border-box;
     font-weight: 400;
     font-size: 1rem;
@@ -13,6 +14,27 @@
     position: relative;
     width: 100%;
     overflow: hidden;
+
+    .newUser {
+        padding-top: 16px;
+        text-align: center;
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: #0056b3;
+            }
+
+            &:focus {
+                outline: none;
+                color: #003f8a;
+            }
+        }
+    }
 
     .loginForm {
         width: 100%;

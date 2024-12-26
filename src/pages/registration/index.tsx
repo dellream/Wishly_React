@@ -1,16 +1,16 @@
 import React, {Suspense} from "react";
 
-const Login = React.lazy(
+const Registration = React.lazy(
     () =>
         import (
-            /* webpackChunkName: 'async-login-page' */
-            './login'
+            /* webpackChunkName: 'async-registration-page' */
+            './registration'
             )
 )
 
 export default () => (
     // ожидаем загрузку компоненты, запасной нет
-    <Suspense fallback={ null }>
-        <Login />
+    <Suspense fallback={null}>
+        <Registration/>
     </Suspense>
 );

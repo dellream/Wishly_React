@@ -10,6 +10,8 @@ const queryClient = new QueryClient({
         onError: _error => {
             const error = _error as unknown as DefaultError;
 
+            const message = getErrorMessage(error);
+            console.log(message);
             // store.dispatch(addErrorAlert(getErrorMessage(error)));
         }
     }),
@@ -17,6 +19,8 @@ const queryClient = new QueryClient({
         onError: _error => {
             const error = _error as unknown as DefaultError;
 
+            const message = getErrorMessage(error);
+            console.log(message);
             // store.dispatch(addErrorAlert(getErrorMessage(error)));
         }
     }),

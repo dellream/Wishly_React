@@ -3,7 +3,7 @@ import {createBrowserRouter, RouteObject} from 'react-router-dom';
 import {PATH} from 'jsConstants';
 import {AppLayout} from 'shared';
 
-import {Main, NotFound, Login} from './pages';
+import {Main, NotFound, Login, Registration} from './pages';
 
 const routes: RouteObject[] = [
     {
@@ -20,6 +20,10 @@ const routes: RouteObject[] = [
             {
                 path: PATH.LOGIN,
                 element: <Login />
+            },
+            {
+                path: PATH.REGISTRATION,
+                element: <Registration />
             }
             // {
             //     path: '/',
