@@ -15,4 +15,5 @@ export enum PATH {
     PROFILE = '/profile',
     NOT_FOUND = '*',
     LOGIN = '/login',
+    FRIENDS = '/friends',
 }
