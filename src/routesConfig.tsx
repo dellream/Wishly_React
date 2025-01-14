@@ -4,6 +4,8 @@ import {PATH} from 'jsConstants';
 import {AppLayout} from 'shared';
 
 import {Main, NotFound, Login, Registration} from './pages';
+import DefaultContent from "./pages/main/defaultContent";
+import CreateWishListForm from "./shared/createWithListForm";
 
 const routes: RouteObject[] = [
     {
@@ -11,7 +13,17 @@ const routes: RouteObject[] = [
         children: [
             {
                 path: PATH.MAIN,
-                element: <Main />
+                element: <Main />,
+                children: [
+                    {
+                        index: true, // Маршрут по умолчанию для Main
+                        element: <DefaultContent />
+                    },
+                    {
+                        path: 'create-wishlist',
+                        element: <CreateWishListForm />
+                    }
+                ]
             },
             {
                 path: PATH.NOT_FOUND,

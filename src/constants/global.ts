@@ -16,4 +16,5 @@ export enum PATH {
     NOT_FOUND = '*',
     LOGIN = '/login',
     FRIENDS = '/friends',
+    CREATE_WISHLIST = '/create-wishlist'
 }

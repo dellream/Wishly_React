@@ -34,64 +34,8 @@
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
   flex-grow: 1; /* Контент растягивается на оставшееся пространство */
   padding: 20px;
   background-color: #fff;
 }
 
-.profileHeader {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.profileAvatar {
-  border-radius: 50%;
-  width: 80px;
-}
-
-.profileInfo {
-  display: flex;
-  flex-direction: column;
-}
-
-.profileName {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.profileStats {
-  margin-top: 10px;
-}
-
-.statsItem {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.profileActions {
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
-}
-
-.profileButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-
-.wishList {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  h3 {
-    margin-right: 20px;
-  }
-}

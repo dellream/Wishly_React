@@ -20,23 +20,17 @@ const AppLayout: React.FC = () => {
         location.pathname === PATH.REGISTRATION ||
         location.pathname === PATH.MAIN;
 
-    // Определяем, отображать ли сайдер
-    const isMainPage = location.pathname === PATH.MAIN;
-
     return (
         <Layout>
             <div className={styles.layout}>
-                <Navbar isAuthenticated={isAuthenticated}/>
+                <Navbar isAuthenticated={isAuthenticated} />
                 <div className={styles.content}>
-                    {isMainPage ? (
-                        <Main/>
-                    ) : (
-                        <Content>
-                            <Outlet/> {/* Рендерим маршруты напрямую */}
-                        </Content>
-                    )}
+                    {/* Все маршруты рендерятся через Outlet */}
+                    <Content>
+                        <Outlet />
+                    </Content>
                 </div>
-                {!PageWithoutFooter && <Footer/>} {/* Футер скрывается на странице логина */}
+                {!PageWithoutFooter && <Footer />} {/* Футер скрывается на странице логина */}
             </div>
         </Layout>
     );
