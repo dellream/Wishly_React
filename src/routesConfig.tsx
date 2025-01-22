@@ -20,7 +20,7 @@ const routes: RouteObject[] = [
                         element: <DefaultContent />
                     },
                     {
-                        path: 'create-wishlist',
+                        path: PATH.CREATE_WISHLIST,
                         element: <CreateWishListForm />
                     }
                 ]

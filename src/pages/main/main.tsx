@@ -13,12 +13,12 @@ const Main: React.FC = () => {
             <div className={styles.sidebar}>
                 <nav className={styles.menu}>
                     <div className={styles.menuItem}>
-                        <Link to={`${PATH.PROFILE}`} className={styles.menuLink}>
+                        <Link to={PATH.PROFILE} className={styles.menuLink}>
                             <span className={styles.menuText}>Моя страница</span>
                         </Link>
                     </div>
                     <div className={styles.menuItem}>
-                        <Link to={`${PATH.FRIENDS}`} className={styles.menuLink}>
+                        <Link to={PATH.FRIENDS} className={styles.menuLink}>
                             <span className={styles.menuText}>Друзья</span>
                         </Link>
                     </div>
