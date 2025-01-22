@@ -2,14 +2,14 @@ export interface WishListCreateIn {
     title: string;
     description: string | null;
     is_public: boolean | null;
-    event_date: Date | null;
+    event_date: string | null;
 }
 
 export interface WishListUpdateIn {
     title: string | null;
     description: string | null;
     is_public: boolean | null;
-    event_date: Date | null;
+    event_date: string | null;
 }
 
 export interface WishList {
@@ -18,5 +18,5 @@ export interface WishList {
     description: string | null;
     user_id: number;
     is_public: boolean;
-    event_date: Date | null;
+    event_date: string | null;
 }

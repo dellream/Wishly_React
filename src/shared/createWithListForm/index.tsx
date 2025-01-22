@@ -1,19 +1,27 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button, DatePicker, Form, Input} from "antd";
+import {Button, DatePicker, Form, Input, Switch} from "antd";
 import styles from "./styles.scss";
 import {RequiredMark} from "antd/es/form/Form";
-import {InfoCircleOutlined} from '@ant-design/icons';
-import ruRU from "antd/locale/ru_RU";
+import {useCreateWishList} from "api/queries/wishlists";
+import {WishListCreateIn} from "api/types/wishlists";
 
 
 const CreateWishListForm: React.FC = () => {
     const navigate = useNavigate();
+    const { mutate: createWishList } = useCreateWishList();  // Деструктурируем mutate из хука
 
-    const handleSave = () => {
-        // Логика сохранения вишлиста
-        console.log("Wish list created");
-        navigate("/"); // Возврат к предыдущему контенту
+    const handleSave = (values: any) => {
+        const { title, description, isPublic, eventDate } = values;
+        const data: WishListCreateIn = {
+            title: title,
+            description: description || undefined,
+            is_public: isPublic || false,
+            event_date: eventDate ? eventDate.format("YYYY-MM-DD") : undefined, // Форматируем дату
+        };
+        createWishList(data);
+
+        navigate("/");
     };
 
     const [form] = Form.useForm();
@@ -31,7 +39,7 @@ const CreateWishListForm: React.FC = () => {
             <Form
                 form={form}
                 layout="vertical"
-                initialValues={{requiredMarkValue: requiredMark}}
+                initialValues={{requiredMarkValue: requiredMark, isPublic: false,}}
                 onValuesChange={onRequiredTypeChange}
                 onFinish={handleSave}
             >
@@ -47,11 +55,23 @@ const CreateWishListForm: React.FC = () => {
                     <Input placeholder="Например, День рождения или Новый год"/>
                 </Form.Item>
 
-                <Form.Item label="Комментарий">
+                <Form.Item label="Комментарий" name="description">
                     <Input placeholder="Напишите что-нибудь вашим друзьям, это может быть приветствие или пожелание"/>
                 </Form.Item>
 
-                <Form.Item label="Дата события" tooltip="Дата события, к которой создается вишлист (необязательно)">
+                <Form.Item
+                    label="Сделать вишлист публичным (по умолчанию вишлист будет доступ только вам)"
+                    name="isPublic"
+                    valuePropName="checked"
+                >
+                    <Switch />
+                </Form.Item>
+
+                <Form.Item
+                    label="Дата события"
+                    tooltip="Дата события, к которой создается вишлист (необязательно)"
+                    name="eventDate"
+                >
                     <DatePicker
                         format="DD-MM-YYYY" // Задаем формат даты
                         placeholder="Выберите дату" // Локализованный placeholder
