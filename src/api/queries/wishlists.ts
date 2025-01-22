@@ -4,11 +4,12 @@ import { WishList, WishListCreateIn, WishListUpdateIn } from 'api/types/wishlist
 import {createWishList, deleteWishList, getWishList, getWishLists, updateWishList} from "api/requests/wishlists";
 import {QUERY_KEYS} from "api/queryKeys";
 
-export const useGetWishLists = (params: URLSearchParams, interval?: number) =>
+export const useGetWishLists = (params: URLSearchParams, options?: { enabled: boolean; refetchInterval?: number }) =>
     useQuery({
         queryKey: [QUERY_KEYS.WISHLISTS, params.toString()],
         queryFn: ({ signal }) => getWishLists(params, signal),
-        refetchInterval: interval ? interval : undefined
+        refetchInterval: options?.refetchInterval,
+        enabled: options?.enabled ?? true,  // по умолчанию enabled = true, если не указано
     });
 
 export const useGetWishList = (wishListId?: number, interval?: number) =>

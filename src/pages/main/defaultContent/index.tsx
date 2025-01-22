@@ -1,10 +1,32 @@
 import React from "react";
-import { Button } from "antd";
+import {Button, Spin} from "antd";
 import styles from "./styles.scss";
 import {Link} from "react-router-dom";
 import {PATH} from "jsConstants";
+import {useGetMe} from "api/queries/user";
+import {useGetWishLists} from "api/queries/wishlists";
+import {Login} from "../../index";
 
 const DefaultContent: React.FC = () => {
+    const { data: user, isLoading: isUserLoading } = useGetMe();
+
+    const params = user ? new URLSearchParams({ request_user_id: user.data.id.toString() }) : null;
+    const { data: wishLists, isLoading: isWishListsLoading } = useGetWishLists(params ?? new URLSearchParams(), {
+        enabled: !!user
+    });
+
+    if (isUserLoading || isWishListsLoading) {
+        return (
+            <div className={styles.loader}>
+                <Spin size="large" />
+            </div>
+        );
+    }
+
+    if (!user) {
+        return <Login />;
+    }
+
     return (
         <div className={styles.defaultContent}>
             <div className={styles.profile}>
@@ -34,10 +56,23 @@ const DefaultContent: React.FC = () => {
             </div>
 
             <div className={styles.wishList}>
-                <h3>Мои вишлисты</h3>
-                <Link to="/create-wishlist">
-                    <Button className={styles.profileButton}>Создать новый</Button>
-                </Link>
+                <div className={styles.wishListHeader}>
+                    <h3>Мои вишлисты</h3>
+                    <Link to="/create-wishlist">
+                        <Button className={styles.profileButton}>Создать новый</Button>
+                    </Link>
+                </div>
+                <ul className={styles.wishListItems}>
+                    {wishLists?.data?.length ? (
+                        wishLists.data.map((wishlist) => (
+                            <li key={wishlist.id} className={styles.wishListItem}>
+                                {wishlist.title}
+                            </li>
+                        ))
+                    ) : (
+                        <p className={styles.noWishListsText}>На данный момент у вас нет вишлистов</p>
+                    )}
+                </ul>
             </div>
 
         </div>

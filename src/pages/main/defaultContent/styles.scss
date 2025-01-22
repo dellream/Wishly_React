@@ -4,6 +4,13 @@
   gap: 36px;
 }
 
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .profileHeader {
   display: flex;
   align-items: center;
@@ -50,10 +57,46 @@
 
 .wishList {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.wishListHeader {
+  display: flex;
   align-items: center;
+  gap: 10px;
 
   h3 {
     margin-right: 20px;
   }
+}
+
+.wishListItems {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.wishListItem {
+  padding: 12px 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #333;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #e6f7ff;
+  }
+}
+
+.noWishListsText {
+  font-size: 16px;
+  color: #999;
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
 }
