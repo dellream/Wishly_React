@@ -9,7 +9,7 @@ import {WishListCreateIn} from "api/types/wishlists";
 
 const CreateWishListForm: React.FC = () => {
     const navigate = useNavigate();
-    const { mutate: createWishList } = useCreateWishList();  // Деструктурируем mutate из хука
+    const { mutate: createWishList } = useCreateWishList();
 
     const handleSave = (values: any) => {
         const { title, description, isPublic, eventDate } = values;
@@ -17,7 +17,7 @@ const CreateWishListForm: React.FC = () => {
             title: title,
             description: description || undefined,
             is_public: isPublic || false,
-            event_date: eventDate ? eventDate.format("YYYY-MM-DD") : undefined, // Форматируем дату
+            event_date: eventDate ? eventDate.format("YYYY-MM-DD") : undefined,
         };
         createWishList(data);
 

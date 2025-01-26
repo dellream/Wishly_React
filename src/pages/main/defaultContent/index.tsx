@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Spin} from "antd";
 import styles from "./styles.scss";
 import {Link} from "react-router-dom";
-import {PATH} from "jsConstants";
+import {getPath, PATH} from "jsConstants";
 import {useGetMe} from "api/queries/user";
 import {useGetWishLists} from "api/queries/wishlists";
 import {Login} from "../../index";
@@ -66,7 +66,9 @@ const DefaultContent: React.FC = () => {
                     {wishLists?.data?.length ? (
                         wishLists.data.map((wishlist) => (
                             <li key={wishlist.id} className={styles.wishListItem}>
-                                {wishlist.title}
+                                <Link to={getPath.wishlistDetail(wishlist.id)} className={styles.wishListLink}>
+                                    {wishlist.title}
+                                </Link>
                             </li>
                         ))
                     ) : (

@@ -6,6 +6,7 @@ import {AppLayout} from 'shared';
 import {Main, NotFound, Login, Registration} from './pages';
 import DefaultContent from "./pages/main/defaultContent";
 import CreateWishListForm from "./shared/createWithListForm";
+import {WishListDetail} from "./pages/main/wishListDetail";
 
 const routes: RouteObject[] = [
     {
@@ -22,6 +23,10 @@ const routes: RouteObject[] = [
                     {
                         path: PATH.CREATE_WISHLIST,
                         element: <CreateWishListForm />
+                    },
+                    {
+                        path: PATH.WISHLIST_DETAIL,
+                        element: <WishListDetail />
                     }
                 ]
             },
