@@ -9,13 +9,13 @@ export interface ThingCreateIn {
 }
 
 export interface ThingUpdateIn {
-    title: string | null;
-    description: string | null;
-    priority: number | null;
-    price: number | null;
-    is_done: boolean | null;
-    image_link: string | null;
-    shop_link: string | null;
+    title?: string | null;
+    description?: string | null;
+    priority?: number | null;
+    price?: number | null;
+    is_done?: boolean | null;
+    image_link?: string | null;
+    shop_link?: string | null;
 }
 
 export interface Thing {
