@@ -1,3 +1,5 @@
+import {Thing} from "api/types/things";
+
 export interface WishListCreateIn {
     title: string;
     description: string | null;
@@ -19,4 +21,8 @@ export interface WishList {
     user_id: number;
     is_public: boolean;
     event_date: string | null;
+}
+
+export interface WishListWithThings extends WishList {
+    things: Thing[];
 }
