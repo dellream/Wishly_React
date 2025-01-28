@@ -2,21 +2,18 @@ import {FC} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Layout, Menu, Row, theme} from "antd";
 import {PATH} from "jsConstants";
+import { UserOutlined } from "@ant-design/icons";
+import styles from './styles.scss'
+import {useLogout} from "api/queries/auth";
 
 interface NavbarProps {
     isAuthenticated: boolean
 }
 
-import styles from './styles.scss'
-import {useLogout} from "api/queries/auth";
-
 export const Navbar: FC<NavbarProps> = ({isAuthenticated}) => {
     const router = useNavigate();
-    const { mutate: logout } = useLogout();
-    const location = useLocation();
 
-    const isAuthPage = location.pathname === PATH.LOGIN || location.pathname === PATH.REGISTRATION;
-
+    const isLandingPage = !isAuthenticated;
 
     const menuAuthItems = [
         {
@@ -26,33 +23,23 @@ export const Navbar: FC<NavbarProps> = ({isAuthenticated}) => {
         }
     ]
 
-    const menuNotAuthItems = [
-        {
-            key: PATH.LOGIN,
-            label: 'Выйти',
-            onClick: () => {
-                logout();
-            }
-        }
-    ]
-
     return (
-        <Layout.Header className={`${styles.header} ${isAuthPage ? styles.loginPage : ''}`}>
+        <Layout.Header
+            className={`${styles.header} ${isLandingPage ? styles.landingHeader : styles.authenticatedHeader}`}
+        >
             <div className={styles.container}>
                 <div className={styles.logo} onClick={() => router(PATH.MAIN)} role="button">
                     Wishly
                 </div>
                 <Row justify="end" align="middle" className={styles.navbar}>
                     {isAuthenticated ? (
-                        <>
-                            <div className={styles.username}>Имя пользователя</div>
-                            <Menu
-                                items={menuNotAuthItems}
-                                className={styles.menu}
-                                selectable={false}
-                                mode="horizontal"
-                            />
-                        </>
+                        <div
+                            className={styles.profile}
+                            onClick={() => router(PATH.MAIN)}
+                            role="button"
+                        >
+                            <UserOutlined className={styles.icon} />Профиль
+                        </div>
                     ) : (
                         <Menu
                             items={menuAuthItems}

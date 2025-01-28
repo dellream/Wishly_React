@@ -6,6 +6,7 @@ import {getPath, PATH} from "jsConstants";
 import {useGetMe} from "api/queries/user";
 import {useGetWishLists} from "api/queries/wishlists";
 import {Login} from "../../index";
+import avatarDefault from "/src/files/avatarDefault.png"
 
 const DefaultContent: React.FC = () => {
     const { data: user, isLoading: isUserLoading } = useGetMe();
@@ -32,12 +33,12 @@ const DefaultContent: React.FC = () => {
             <div className={styles.profile}>
                 <div className={styles.profileHeader}>
                     <img
-                        src="/images/app/profile/avatarDefault.png"
+                        src={avatarDefault}
                         className={styles.profileAvatar}
                         alt="Avatar"
                     />
                     <div className={styles.profileInfo}>
-                        <h1 className={styles.profileName}>Какой-то пользователь, здесь нужна ручка</h1>
+                        <h1 className={styles.profileName}>{user.data.email}</h1>
                         <div className={styles.profileStats}>
                             <div className={styles.statsItem}>
                                 <span className={styles.statsText}>Количество друзей, нужна ручка</span>

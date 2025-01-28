@@ -40,7 +40,7 @@ html, body {
 
 .siderWrapper {
   display: flex;
-  flex-direction: row; /* Сайдбар и контент рядом друг с другом */
+  flex-direction: row;
   width: 100%;
   max-width: calc(100vw - 64px); /* Максимальная ширина всей области */
   height: 100%;
@@ -51,16 +51,16 @@ html, body {
 }
 
 .siderContent {
-  flex: 1; /* Занимает оставшееся место */
+  flex: 1;
   padding: 24px;
-  background-color: #fafafa; /* Фон для контента */
+  background-color: #fafafa;
   overflow-y: auto;
 }
 
 .ant-layout-sider {
-  width: 200px !important; /* Фиксированная ширина сайдера */
-  background-color: #f0f2f5; /* Цвет фона */
-  border-right: 1px solid #d9d9d9; /* Разделение сайдера и контента */
+  width: 200px !important;
+  background-color: #f0f2f5;
+  border-right: 1px solid #d9d9d9;
 }
 
 
