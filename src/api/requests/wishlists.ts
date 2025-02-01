@@ -13,6 +13,7 @@ export const getWishLists = async (params: URLSearchParams, signal?: AbortSignal
 export const getWishList = async (wishListId: number, signal?: AbortSignal) =>
     wishlist.get<WishListWithThings>(`/v1/wishlists/${ wishListId }`, { signal });
 
+
 export const updateWishList = async (data: WishListUpdateIn, wishListId: number) =>
     wishlist.patch<WishListUpdateIn, WishList>(`/v1/wishlists/${ wishListId }`, { ...data });
 

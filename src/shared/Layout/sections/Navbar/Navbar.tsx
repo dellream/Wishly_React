@@ -13,7 +13,7 @@ interface NavbarProps {
 export const Navbar: FC<NavbarProps> = ({isAuthenticated}) => {
     const router = useNavigate();
 
-    const isLandingPage = !isAuthenticated;
+    const isLandingPage = !isAuthenticated && useLocation().pathname === PATH.MAIN;
 
     const menuAuthItems = [
         {
