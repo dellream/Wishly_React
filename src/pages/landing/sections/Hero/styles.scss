@@ -1,10 +1,15 @@
+@use "mixins";
+
 .container {
   width: 100vw;
   background-color: #FFF0F0;
   padding: 160px 0 250px 0;
-
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
+
+  @include mixins.mobile {
+    padding: 60px 20px;
+  }
 }
 
 .textContainter {
@@ -23,9 +28,14 @@
   align-items: center;
   color: #1D1D1D;
   padding: 0 40px;
-
   max-width: 1312px;
   margin: 0 auto;
+
+  @include mixins.mobile {
+    flex-direction: column;
+    padding: 0;
+    text-align: center;
+  }
 }
 
 .photo {
@@ -35,6 +45,10 @@
   margin-left: -25%;
   position: relative;
   z-index: 1;
+
+  @include mixins.mobile {
+    display: none;
+  }
 }
 
 .title {
@@ -44,6 +58,12 @@
   color: #1D1D1D;
   margin: 0;
   max-width: 645px;
+
+  @include mixins.mobile {
+    font-size: 36px;
+    line-height: 48px;
+    max-width: 100%;
+  }
 }
 
 .subtitle {
@@ -52,6 +72,12 @@
   margin-bottom: 2rem;
   color: #4A4A4A;
   max-width: 540px;
+
+  @include mixins.mobile {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    max-width: 100%;
+  }
 }
 
 .ctaButton {
@@ -69,5 +95,10 @@
 
   &:hover {
     background-color: #e0244b;
+  }
+
+  @include mixins.mobile {
+    width: 100%;
+    text-align: center;
   }
 }

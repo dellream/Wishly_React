@@ -1,3 +1,5 @@
+@use "mixins";
+
 .container {
   display: flex;
   min-height: calc(100vh - 64px); /* Высота равна высоте окна */
@@ -13,12 +15,28 @@
   justify-content: space-between;
   padding: 50px 20px;
   min-height: calc(100vh - 64px);
+
+  @include mixins.mobile {
+    display: none; /* Скрываем сайдбар на мобильных устройствах */
+  }
 }
 
 .menu {
   display: flex;
   flex-direction: column;
   gap: 20px; /* Расстояние между пунктами меню */
+
+  @include mixins.mobile {
+    flex-direction: row;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+  }
 }
 
 .menuItem {
@@ -27,6 +45,10 @@
   line-height: 20px;
   letter-spacing: 0.1px;
   cursor: pointer;
+
+  @include mixins.mobile {
+    font-size: 14px; /* Уменьшаем размер шрифта для мобильных */
+  }
 }
 
 .menuLink {
@@ -37,7 +59,6 @@
   .active {
     color: #1890ff;
   }
-
 }
 
 .menuText {
@@ -55,10 +76,10 @@
   text-decoration: none;
   transition: color 0.2s ease;
   margin-bottom: 50px;
-}
 
-.logout:hover {
-  color: #1890ff;
+  @include mixins.mobile {
+    display: none;
+  }
 }
 
 .content {
@@ -69,4 +90,14 @@
 .icon {
   font-size: 18px;
   margin-right: 8px;
+
+  @include mixins.mobile {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
 }

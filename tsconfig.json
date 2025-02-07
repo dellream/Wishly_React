@@ -5,6 +5,9 @@
     "module": "ESNext",
     "baseUrl": "./src",
     "paths": {
+      "mixins": [
+        "styles/mixins.scss"
+      ],
       "constants": [
         "styles/constants.scss"
       ],

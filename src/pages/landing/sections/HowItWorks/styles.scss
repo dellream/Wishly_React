@@ -1,8 +1,14 @@
+@use "mixins";
+
 .container {
   width: 100vw;
   padding: 160px 0 250px 0;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
+
+  @include mixins.mobile {
+    padding: 60px 20px;
+  }
 }
 
 .content {
@@ -10,6 +16,10 @@
   align-items: center;
   max-width: 1312px;
   margin: 0 auto;
+
+  @include mixins.mobile {
+    padding: 0 20px;
+  }
 }
 
 .title {
@@ -17,6 +27,11 @@
   font-weight: 700;
   text-align: center;
   margin-bottom: 64px;
+
+  @include mixins.mobile {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
 }
 
 .columns {
@@ -38,6 +53,13 @@
     margin: 16px 0 8px 0;
     color: #1D1D1D;
   }
+
+  @include mixins.mobile {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
 }
 
 .stepOne,
@@ -55,4 +77,8 @@
   border-radius: 32px;
   margin-bottom: 16px;
   max-width: 400px;
+
+  @include mixins.mobile {
+    max-width: 100%;
+  }
 }
