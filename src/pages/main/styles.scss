@@ -85,6 +85,10 @@
 .content {
   flex-grow: 1; /* Контент растягивается на оставшееся пространство */
   padding: 20px;
+
+  @include mixins.mobile {
+    max-width: 100%;
+  }
 }
 
 .icon {

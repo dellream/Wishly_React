@@ -11,8 +11,17 @@ import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import styles from "./styles.scss";
 import {Thing, ThingCreateIn, ThingUpdateIn} from "api/types/things";
-import {EllipsisOutlined, EditOutlined, DeleteOutlined, CheckCircleOutlined, LeftOutlined} from '@ant-design/icons';
+import {
+    EllipsisOutlined,
+    EditOutlined,
+    DeleteOutlined,
+    CheckCircleOutlined,
+    LeftOutlined,
+    LinkOutlined
+} from '@ant-design/icons';
 import {PATH} from "jsConstants";
+import presentDefault from "/src/files/presentDefault.png";
+import {ThingDescription} from "./thingDescription";
 
 
 dayjs.locale("ru");
@@ -31,18 +40,10 @@ export const WishListDetail: React.FC = () => {
 
     const [form] = Form.useForm<ThingCreateIn | ThingUpdateIn>();
 
-    if (isLoading) {
-        return (
-            <div className={styles.loader}>
-                <Spin size="large"/>
-            </div>
-        );
-    }
-
+    if (isLoading) return <div className={styles.loader}><Spin size="large"/></div>;
     if (error) {
         return <p className={styles.errorText}>Не удалось загрузить информацию о вишлисте</p>;
     }
-
     if (!wishList) {
         return <p className={styles.noWishListText}>Вишлист не найден</p>;
     }
@@ -113,77 +114,21 @@ export const WishListDetail: React.FC = () => {
         {
             label: thing.is_done ? 'Вернуть в активное' : 'Отметить как завершённое',
             key: 'done',
-            icon: <CheckCircleOutlined />,
+            icon: <CheckCircleOutlined/>,
             onClick: () => handleToggleDone(thing),
         },
         {
             label: 'Редактировать',
             key: 'edit',
-            icon: <EditOutlined />,
+            icon: <EditOutlined/>,
             onClick: () => handleEdit(thing),
         },
         {
             label: 'Удалить',
             key: 'delete',
-            icon: <DeleteOutlined />,
+            icon: <DeleteOutlined/>,
             danger: true,
             onClick: () => handleDelete(thing.id),
-        },
-    ];
-
-
-    const columns = [
-        {
-            title: "Фото",
-            dataIndex: "image_link",
-            key: "image_link",
-            render: (imageLink: string | undefined) =>
-                imageLink ? (
-                    <img
-                        src={imageLink}
-                        alt="Фото"
-                        style={{
-                            width: "120px",
-                            height: "120px",
-                            objectFit: "cover",
-                            borderRadius: "4px",
-                        }}
-                    />
-                ) : (
-                    "Нет фото"
-                ),
-        },
-        {
-            title: "Название",
-            dataIndex: "title",
-            key: "title",
-        },
-        {
-            title: "Описание",
-            dataIndex: "description",
-            key: "description",
-        },
-        {
-            title: "Приоритет",
-            dataIndex: "priority",
-            key: "priority",
-        },
-        {
-            title: "Цена",
-            dataIndex: "price",
-            key: "price",
-            render: (price: number | undefined) => (price ? `${price} ₽` : "-"),
-        },
-        {
-            title: "",
-            key: "actions",
-            render: (thing: Thing) => {
-                return (
-                    <Dropdown menu={{items: menuItems(thing)}} trigger={['click']}>
-                        <Button type="text" icon={<EllipsisOutlined/>}/>
-                    </Dropdown>
-                );
-            },
         },
     ];
 
@@ -214,31 +159,47 @@ export const WishListDetail: React.FC = () => {
                 </div>
             </div>
 
+            <div className={styles.itemsGrid}>
+                {sortedThings.map((thing) => (
+                    <div key={thing.id} className={`${styles.itemCard} ${thing.is_done ? styles.done : ""}`}>
 
-            <Table
-                dataSource={sortedThings}
-                columns={columns}
-                rowKey="id"
-                pagination={false}
-                className={styles.table}
-                rowClassName={(record: Thing) => (record.is_done ? `${styles.doneRow}` : '')}
-                onRow={(record: Thing) => ({
-                    onClick: (e) => {
-                        const target = e.target as HTMLElement;
+                        <div className={styles.itemTop}>
+                            <div className={styles.itemImage}>
+                                <img
+                                    src={thing.image_link || presentDefault}
+                                    alt={thing.title}
+                                />
+                            </div>
 
-                        if (target.closest(".ant-dropdown") || target.closest(".ant-btn")) {
-                            return;
-                        }
 
-                        if (record.shop_link) {
-                            window.open(record.shop_link, "_blank");
-                        }
-                    },
-                    style: {
-                        cursor: record.shop_link ? "pointer" : "default",
-                    },
-                })}
-            />
+                            <div className={styles.itemContent}>
+                                <h3>{thing.title}</h3>
+                                <span className={styles.priority}>Приоритет: {thing.priority}</span>
+
+                                <div className={styles.thingDescription}>
+                                    <ThingDescription description={thing.description}/>
+                                </div>
+
+                                <div className={styles.bottomContent}>
+                                    <span>{thing.price ? `${thing.price} ₽` : ""}</span>
+                                    {thing.shop_link && (
+                                        <div className={styles.itemShop}>
+                                            <a href={thing.shop_link} target="_blank" rel="noopener noreferrer">
+                                                <LinkOutlined/> В магазин
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            <Dropdown menu={{items: menuItems(thing)}} trigger={["click"]}>
+                                <Button type="text" icon={<EllipsisOutlined/>} className={styles.dropdownButton}/>
+                            </Dropdown>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
 
             <Modal
                 title={editingThing ? "Редактировать вещь" : "Добавить вещь"}

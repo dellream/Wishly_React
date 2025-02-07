@@ -1,12 +1,14 @@
 @use "mixins";
 
 .wishListDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
   .title {
     display: flex;
     align-items: center;
     gap: 20px;
-    margin: 10px 0;
 
     @include mixins.mobile {
       flex-direction: column;
@@ -20,7 +22,7 @@
 
     .addButton {
       border: 1px solid #1890ff;
-      border-radius: 12px;
+      border-radius: 16px;
       color: #1890ff;
       background: transparent;
       padding: 18px 22px;
@@ -29,7 +31,6 @@
         background: rgba(24, 144, 255, 0.1);
       }
     }
-
   }
 
   .backButton {
@@ -40,24 +41,18 @@
     background: none;
     font-size: 16px;
     cursor: pointer;
-    color: rgb(166, 182, 197);;
+    color: rgb(166, 182, 197);
     padding: 5px;
-
 
     &:hover {
       color: #333;
     }
   }
 
-  .backIcon {
-    font-size: 16px;
-  }
-
-
   .description {
     font-size: 16px;
     color: #555;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
   }
 
   .meta {
@@ -67,12 +62,12 @@
     padding: 10px;
     background: #fff;
     border-radius: 8px;
-    margin: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     div {
       display: flex;
       align-items: center;
-      gap: 8px; // Расстояние между ключом и значением
+      gap: 8px;
     }
 
     .metaLabel {
@@ -80,8 +75,150 @@
     }
   }
 
-  .doneRow {
-    color: #9e9e9e;
-    text-decoration: line-through;
+  .itemsGrid {
+    display: block;
+    width: 100%;
+
+    .itemCard {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      margin-bottom: 16px;
+      transition: transform 0.3s ease-in-out;
+      position: relative;
+
+      &:hover {
+        transform: scale(1.01);
+      }
+
+      &.done {
+        background-color: #d3d3d3;
+      }
+
+      &.done::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(158, 158, 158, 0.3);
+        border-radius: 18px;
+        pointer-events: none;
+      }
+    }
+
+    .itemTop {
+      display: flex;
+      position: relative; // Для позиционирования дропдауна
+      gap: 16px;
+    }
+
+    .itemImage {
+      width: 160px;
+      height: 160px;
+      flex-shrink: 0;
+      border-radius: 4px;
+      overflow: hidden;
+
+      @include mixins.mobile {
+        width: 100px;
+        height: 100px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .itemContent {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+
+      .toggleButton {
+        color: #555;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 18px;
+        max-width: calc(100% - 32px);
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        white-space: normal;
+        word-break: break-word;
+
+        @include mixins.mobile {
+          font-size: 14px;
+        }
+      }
+
+      p {
+        margin: 4px 0;
+        font-size: 14px;
+      }
+
+      .priority {
+        font-weight: bold;
+        color: #818181;
+
+        @include mixins.mobile {
+          font-size: 12px;
+        }
+      }
+
+      .thingDescription {
+        margin: 6px 0;
+      }
+    }
+
+    .bottomContent {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: bold;
+
+      @include mixins.mobile {
+        font-size: 12px;
+      }
+
+      .itemShop {
+        text-align: center;
+
+        a {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          color: #007bff;
+          font-size: 16px;
+          text-decoration: none;
+
+          @include mixins.mobile {
+            font-size: 12px;
+          }
+
+          &:hover {
+            color: #0056b3;
+          }
+        }
+      }
+    }
+
+    .dropdownButton {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
   }
+
 }
