@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import styles from "./styles.scss";
 import {Thing, ThingCreateIn, ThingUpdateIn} from "api/types/things";
-import {EllipsisOutlined, EditOutlined, DeleteOutlined, CheckCircleOutlined} from '@ant-design/icons';
+import {EllipsisOutlined, EditOutlined, DeleteOutlined, CheckCircleOutlined, LeftOutlined} from '@ant-design/icons';
 import {PATH} from "jsConstants";
 
 
@@ -189,9 +189,19 @@ export const WishListDetail: React.FC = () => {
 
     return (
         <div className={styles.wishListDetail}>
-            <Button onClick={() => navigate(PATH.MAIN)}>Назад</Button>
+            <button onClick={() => navigate(PATH.MAIN)} className={styles.backButton}>
+                <LeftOutlined className={styles.backIcon}/>
+                К списку вишлистов
+            </button>
 
-            <h1 className={styles.title}>{wishList.data.title}</h1>
+            <div className={styles.title}>
+                <h1>{wishList.data.title}</h1>
+
+                <Button onClick={handleAdd} className={styles.addButton}>
+                    Добавить вещь
+                </Button>
+            </div>
+
             <p className={styles.description}>{wishList.data.description}</p>
             <div className={styles.meta}>
                 <div>
@@ -204,14 +214,12 @@ export const WishListDetail: React.FC = () => {
                 </div>
             </div>
 
-            <Button type="primary" onClick={handleAdd} className={styles.addButton}>
-                Добавить вещь
-            </Button>
 
             <Table
                 dataSource={sortedThings}
                 columns={columns}
                 rowKey="id"
+                pagination={false}
                 className={styles.table}
                 rowClassName={(record: Thing) => (record.is_done ? `${styles.doneRow}` : '')}
                 onRow={(record: Thing) => ({
